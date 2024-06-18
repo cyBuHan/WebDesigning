@@ -2,6 +2,6 @@ FROM ubuntu:latest
 
 ADD . /src/demo.html
 
-WORKER /src
+WORKDIR /src
 
 CMD cd /src
