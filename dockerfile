@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-ADD ./src/demo.html
+ADD . /src/demo.html
 
 WORKER /src
 
