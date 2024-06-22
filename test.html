@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- 页面标题 -->
+<head>
+
+
+
+    <!-- 字符集格式 -->
+    <meta charset="UTF-8">
+
+    <!-- 设置浏览器兼容性 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>我的网页name</title>
+    
+    <!--通过style处理多个对象-->
+    <style id="head_style">
+        body{
+            background-color: white;
+        }
+        #div1{
+            width: 72%;
+            margin: 0 auto;
+        }
+        #img_div{
+            float:left;
+            display:inline-end;
+        }
+    </style>
+
+    <script src="./vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</head>
+
+<!--页面主体-->
+<body>
+    <!-- 通过div实现盒子组合，即一堆相邻元素（可不同类别）共同放入一个整体中处理 -->
+    <div id="div1">
+
+         <!-- 
+            scr:路径 可以输入网站页面
+            width:宽度 单位 1.px  2.百分比，相对于父元素的百分比
+            height:高度  单位 1.px 2.百分比，相对于父元素的百分比
+        -->
+        <div id="img_div">
+            <img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.mH9YLFEL5YdVxJM82mjVJQAAAA?rs=1&pid=ImgDetMain" width="1200px">
+            <img src="https://pic35.photophoto.cn/20150511/0034034892281415_b.jpg" width="1200px" >
+        </div>
+    
+        
+        <!-- 
+            h1为一级标题，最大的标题 
+            总共 h1->h6
+        -->
+        <hr>
+        <h1 style= "color:blue;">This is a first-head.</h1>
+        <hr>
+        
+        <!--
+            插入css代码，丰富样式 
+            1.行内样式，写在style属性中 如 <h1 style ="color:red;">  </h1>
+            2.内嵌样式，写在style标签中 如 <style> h1 {color : red;} </style>,一般用于对页面全部元素操作，比如左侧示例则是所有h1均为红色
+            3.外嵌样式，写在一个单独.css文件中，通过link标签引入
+         -->
+        <!-- 
+            color 赋值
+            1.RGB编码    如 color:rgb(0,0,0);
+            2.特定关键字  如  color:red;
+            3.十六进制编码 如 color:#000000;
+        -->
+        <!-- 无实际意义，用于划分元素进行不同修饰 -->
+        <h1 style="color: green;"><span style ="color: red";>这部分要红色    </span>这部分保持原本绿色</h1>
+
+        <!-- a 超链接 用于跳转 
+            href:跳转对象
+            target:如何打开对象，默认_self表示在当前页面打开，_blank在空白页面打开
+        -->
+        <a href="https://www.bilibili.com/v/anime/offical/#/" target=_blank> 
+            <span style="color: green;text-decoration: none;" >前往</span>
+            <span style="color:red;">B站</span>
+        </a>
+
+        <!-- 视频标签 video
+            src:视频url;
+            controls:显示播放控件
+            width:播放器的宽度
+            height: 播放器的高度
+        -->
+        <!-- 音频标签 audio
+            src:视频url;
+            controls:显示播放控件
+        -->
+        <br>
+        <video src="https://www.bilibili.com/video/BV1Nm421G7Qd/?spm_id_from=333.1007.tianma.1-1-1.click" controls="True"></video>
+    
+        <!--段落标签  p  -->
+
+        <!-- 文本加粗 b  -->
+
+        <!-- 文本强调  strong -->
+        <hr>
+            <strong>this is a strong.</strong>
+        <hr>
+        <b>this is a 加粗.</b>
+        
+        <div id="div_input">
+            <input type="text" values="name" v-model="age">
+            hello,{{name}}
+            <p v-show="age>13">{{age}}</p>
+        </div>
+
+
+        <!-- table是一个表格 ，包裹多个tr, 一个tr就是一行，其中每行的表格单元格用 td表示，表头单元格可以用th -->
+        <table border="80%" cellspacing="0">
+            <tr>
+                <th style="color: red;">表头</th>
+            </tr>
+            <tr>
+                <td><img src="https://pic35.photophoto.cn/20150511/0034034892281415_b.jpg" width="50%" height="50%" ></td>
+                <td><video src="http://tv.people.com.cn/n1/2021/0915/c61600-32228190.html" controls="True"></td>
+            </tr>
+        </table>
+        <!-- form 表单
+            action: 表单提交的url,默认为本网页
+            method：表单提交的方式
+                get:在url后面拼接表单数据，比如: "url"?username=Jack&age=18，但由于url长度有限，所以很可能提交不全，默认为get
+                post:在消息体（请求体）中提交，参数无大小限制
+
+            表单内部有表单项组成
+            input：定义表单项，通过type属性控制输入形式(type="submit"时为提交按钮)，另外必须设置name
+            select:定义下拉列表，列表选项由option标签定义，option中实际提交结果由value确定
+            textarea:定义文本域
+        -->
+        <form method="post">
+            <input type="text" name="User_id">
+            <select name="age" >
+                <option value="1">1</option>
+                <option value="2">2</option>
+            </select>
+            <input type="submit" value="提交">
+        </form>
+        <br>
+        <br>
+        选择你的背景色：
+        <input type="button" value="back" id="back">
+        <select values="color" id="select"  onclick="on()">
+            <option value="green" id="green">green</option>
+            <option value="blue" id="blue" >blue</option>
+        </select>
+        终止渲染:
+        <input type="button" id="stop" value="stop">
+        <input type="button" id="start" value="start">
+        <input type="button" id="but" value="发送">
+    </div>
+    
+    <!-- javascript引入方式
+    内部引入：直接在html文件中编写，<script>js代码</script>，一般将脚本置于body底部，可以提高显示速度
+    外部引入：单独编写js文件，通过<script scr="js文件路径"></scrip>引用
+    -->
+    <!-- javascript 输入语句
+    window.alert()警告框输出
+    document.write()html页面输出
+    console.log()写入浏览器控制台
+    -->
+
+    <!-- var声明变量，可以重复定义，且全局变量
+         let声明局部变量，不能重复定义
+         const声明常量
+     -->
+
+     <!-- 
+     == 不同类型数进行比较会暂时转换为相同类型比较，
+     === 数据类型不同直接返回false
+     字符串类型转换number时，会将转成前面存在的数字，如果不存在数字则为NAN，比如parseInt("123ab5")结果为123
+     其他类型转boolean：
+     Number:0和NaN为false,其他为true
+     String:空字符串为false,其他未true
+     Null和undefined:均转为false.
+     -->
+
+     <!-- 流程控制
+        if else
+        switch
+        for 
+        while
+        do ... while
+        ...基本与java一致
+     -->
+
+     <!-- 函数定义
+        function 函数名(参数1,参数2...):{
+            函数内容
+        }
+        注意：javascript是一种弱类型语言，所以它不用声明参数类型和返回值类型
+        如果有返回值,return即可,如果没有返回值,可以不用写return
+        类似lambda函数，
+        var 名称=function(参数1，参数2...){
+            函数内容
+        }
+        或者 var 名称 = (参数1，参数2)=>{
+            函数内容
+        }    
+
+     -->
+
+    <!--数组对象定义
+        1.var 名字 = new Array(元素列表)
+        2.var 名字 = [元素列表]
+        其作用类似python中列表，即长度可变且可以存不同类型元素
+        当存在未初始化部分时，对应位置为undefine
+        常用几种数组方法：
+        1.length属性,设置或返回数组长度
+        2.forEach(function)方法,遍历数组中每个有值元素，同时传给函数，forEach参数为函数
+        3.push(var)方法,将新元素添加到数组末尾，同时返回新的长度
+        4.splice(start,num)方法,从数组中start位置开始删除num个元素
+    -->
+
+    <!-- 字符串对象定义
+        1.var 名字 = new String("")
+        2.var 名字 = ""
+        常用方法:
+        1.length属性，返回长度
+        2.indexOf() 搜索字符串中某子串的位置
+        3.trim() 去除字符串两边空格
+        4.charAt() 返回指定位置的字符
+        5.substring() 提取字符串中两个指定位置之间的字符
+    -->
+
+    <!-- 自定义对象
+        var 对象名 ={
+            属性名:属性值,
+            函数名:function(参数列表){
+            
+            }
+        };
+    -->
+
+    <!-- json对象和自定义对象类似，但是其属性名必须用双引号包围（单引号不行）
+        json对象声明之后如果被单引号包围，即为一个json字符串
+        json字符串转为js对象 JSON.parse(json字符串)
+        json对象转为json字符串 JSON.stringify(json对象)
+     -->
+
+     <!-- window对象（浏览器窗口对象），javascript中,window.可以省略
+        常用属性和方法：
+        1.history:对History对象的只读引用
+        2.用于窗口和框架的Location对象 
+        Location对象的两个常用属性--herf:返回或设置网页URL，
+        3.对Navigator对象的只读引用
+        4.alert()显示带有一段消息和一个确认按钮的警告框
+        5.confirm()显示带有一段消息以及确认和取消按钮的对话框，当点击确定，返回true；反之返回false;
+        6.setInterval(function,time)按照指定周期(以毫秒计算)来调用函数或者计算表达式
+        7.setTimeout()在指定毫秒后调用函数或者计算表达式(只有一次)
+     -->
+
+     <!-- DOM对象（文档对象）通过DOM对象，可以对html元素进行操作
+        常用获取元素的方法
+        document.getElementById();根据id获取
+        document.getElementsByTagName();根据标签获取
+        document.getElementsByName();根据name获取
+        document.getElementsByClassName();根据class获取
+     -->
+
+     <!-- 
+        点击事件
+        1.通过标签设置
+        在标签中添加属性 onclick="点击反馈函数",
+
+        2.通过dom元素属性绑定
+        document.getElement...().onlick=function(){
+        };
+     -->
+    <!--常见事件 
+        onclick 鼠标单击
+        onblur  元素失去焦点
+        onfocus 元素获得焦点
+        onload  某个页面或图像被完成加载
+        onsubmit   当表单提交
+        onkeydown   某个键盘按键被按下
+        onmouseover 鼠标被移到某元素上
+        onmouseout  鼠标从某元素移开
+    -->
+    
+    <!-- vue架构 
+        主要特点：实现数据的双向绑定
+        vue使用模板
+        1.引入Vue.js文件 即<script src="该文件路径"></script>
+        2.在js区域创建一个Vue对象，定义数据模型
+        new Vue({
+            el:"",//说明管理的区域，一般用id
+            data:{
+                message:"this is information";
+            },
+            methods{
+                function1:function(){
+                    }
+                }
+            }
+        })  
+        3.在视图中调用,添加vue相关指令,其值为"message"
+        <    v-model="message" >
+        4.常见vue指令
+            v-bind:为html标签绑定属性值，如设置href,css等
+            v-model:实现数据双向绑定，设置v-model的部分和对于Vue对象中对于数据双向绑定，一方改变全变
+            v-on:为html标签绑定事件，响应函数在Vue中定义
+            v-if,v-else-if,v-else:条件性渲染，为true时展示，false不展示，且浏览器查看代码不存在
+            v-show: 根据条件选择展示，均会在浏览器代码中体现，如果条件false，则会在属性中添加display=none，使之不显示
+            v-for:遍历展示vue对象中的某个数组等可迭代类型元素，使用格式 v-for="a in loop" or v-for="(a,index) in loop" 后面一种可以同时获得对于索引
+        5.vue生命周期
+          beforeCreate 创建前
+          created      创建后
+          beforeMount  挂载前
+          mounted      挂载完成(一般在此向服务器发送请求)
+          beforeUpdate 更新前
+          updated      更新后
+          beforeDestroy销毁前
+          destroyed    销毁后
+        -->
+
+    <!-- axios 向服务器发送请求: 
+        创建一个axios对象({
+            method:"get",//请求方法
+            url:"请求的地址"
+        }).then((result)=>{
+            //请求后的执行,result为服务器返回的对象
+        })
+        简写:
+        axios.get(url)
+        axios.delete(url)
+        axios.post(url,data)
+        axios.put(url,data)
+    -->
+    <script>
+        
+        //修改背景颜色 
+        var back_ground=document.getElementById("head_style")
+        function on(){
+            var select=document.getElementById("select")
+            back_ground.innerHTML='body{background-color: '+select.value+';}#div1{width: 72%; margin: 0 auto;}'
+        }
+        document.getElementById("back").onclick=function(){ 
+            back_ground.innerHTML='body{background-color: white;} #div1{width: 72%; margin: 0 auto;}'
+        }
+        
+        //手动开启动态切换背景
+        document.getElementById("start").onclick=function(){
+            var i=0
+            color=["red","blue","green"]
+            Interval=setInterval(()=>{ 
+                back_ground.innerHTML='body{background-color: '+color[i%3]+';} #div1{width: 72%; margin: 0 auto;}'
+                i+=1;
+            },1500)
+        }
+        
+        //手动关闭动态切换背景
+        document.getElementById("stop").onclick=function(){
+            clearInterval(Interval);
+        }
+        
+        new Vue({
+            el:"#div_input",
+            data:{
+                name:"afa",
+                age:12,
+            }
+        })
+
+        
+        document.getElementById("but").onclick=()=>{
+            alert("开始发送")
+            axios.get("https://dino.zone/zh-cn/").then((result)=>{
+                    alert(result.data)
+          })
+        }
+
+
+
+    </script>
+
+</body>
+</html>
